@@ -82,17 +82,19 @@ if __name__ == "__main__":
         train_dir = path + "/train"
         test_dir = path + "/test"
 
-        # Load data
-        train_gen, test_gen = load_data(train_dir, test_dir)
 
-        # Create model
-        model = create_model()
+        if not os.path.exists("emotion_detector_model_1.keras"):
+            # Load data
+            train_gen, test_gen = load_data(train_dir, test_dir)
 
-        # Evaluate model
-        model.evaluate(test_gen)
+            # Create model
+            model = create_model()
 
-        # Train model
-        train_model(model, train_gen, test_gen, epochs=100)
+            # Evaluate model
+            model.evaluate(test_gen)
+
+            # Train model
+            train_model(model, train_gen, test_gen, epochs=100)
 
         # Start detection with the webcam
         startApp()
